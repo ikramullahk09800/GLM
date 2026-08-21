@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLM VPS - High Performance VPS Hosting</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --bg-dark: #0f0f13;
+            --bg-card: #1a1a24;
+            --accent: #6c63ff;
+            --accent-hover: #5a52d5;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0c0;
+            --border: #2a2a3d;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: rgba(15,15,19,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--accent) !important;
+        }
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--text-primary) !important;
+        }
+        .btn-primary-custom {
+            background-color: var(--accent);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-primary-custom:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #b0b0ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        .hero .btn {
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            margin: 0 10px;
+        }
+        .btn-outline-custom {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-outline-custom:hover {
+            background-color: var(--accent);
+            color: #fff;
+        }
+        .features {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+        .section-title p {
+            color: var(--text-secondary);
+        }
+        .feature-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        .feature-card h5 {
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        .feature-card p {
+            color: var(--text-secondary);
+        }
+        .pricing {
+            padding: 80px 0;
+            background-color: #12121a;
+        }
+        .pricing-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            height: 100%;
+        }
+        .pricing-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .pricing-card.popular {
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(108,99,255,0.2);
+        }
+        .pricing-card .price {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+        .pricing-card .period {
+            color: var(--text-secondary);
+        }
+        .pricing-card ul {
+            list-style: none;
+            padding: 20px 0;
+            text-align: left;
+        }
+        .pricing-card ul li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+        }
+        .pricing-card ul li i {
+            color: #28a745;
+            margin-right: 10px;
+        }
+        .pricing-card .btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 30px;
+            font-weight: 600;
+        }
+        .testimonials {
+            padding: 80px 0;
+        }
+        .testimonial-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        .testimonial-card p {
+            font-style: italic;
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+        }
+        .testimonial-card .user {
+            display: flex;
+            align-items: center;
+        }
+        .testimonial-card .user img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: #333;
+        }
+        .testimonial-card .user .name {
+            font-weight: 600;
+        }
+        .testimonial-card .user .role {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .footer {
+            background-color: #0a0a0f;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+        }
+        .footer p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        .footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#">GLM VPS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="border-color: #fff;">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+                    <li class="nav-item"><a class="btn btn-primary-custom ms-3" href="#pricing">Get Started</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>High Performance VPS Hosting</h1>
+            <p>Experience blazing-fast speeds, rock-solid reliability, and full root access with GLM VPS. Deploy your projects in minutes.</p>
+            <div>
+                <a href="#pricing" class="btn btn-primary-custom">View Plans</a>
+                <a href="#features" class="btn btn-outline-custom">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose GLM VPS?</h2>
+                <p>Built for developers, powered by cutting-edge infrastructure.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                        <h5>Blazing Fast SSD</h5>
+                        <p>NVMe SSD storage ensures lightning-quick read/write speeds for your applications.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-shield-lock-fill"></i>
+                        <h5>DDoS Protection</h5>
+                        <p>Enterprise-grade DDoS mitigation keeps your services online even under attack.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-globe"></i>
+                        <h5>Global Network</h5>
+                        <p>Choose from multiple data centers worldwide for low latency to your users.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-cpu"></i>
+                        <h5>Full Root Access</h5>
+                        <p>Complete control over your server environment with full root SSH access.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-arrow-repeat"></i>
+                        <h5>99.9% Uptime SLA</h5>
+                        <p>We guarantee uptime with automatic failover and redundant infrastructure.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="bi bi-headset"></i>
+                        <h5>24/7 Support</h5>
+                        <p>Our expert team is available around the clock to assist you with any issue.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>No hidden fees. Cancel anytime.</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h4>Basic</h4>
+                        <div class="price">$4.99<span class="period">/mo</span></div>
+                        <ul>
+                            <li><i class="bi bi-check-circle-fill"></i>1 vCPU Core</li>
+                            <li><i class="bi bi-check-circle-fill"></i>2 GB RAM</li>
+                            <li><i class="bi bi-check-circle-fill"></i>50 GB SSD</li>
+                            <li><i class="bi bi-check-circle-fill"></i>2 TB Bandwidth</li>
+                            <li><i class="bi bi-check-circle-fill"></i>1 IPv4 Address</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary-custom">Choose Basic</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pricing-card popular">
+                        <span class="badge bg-primary" style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%);">Most Popular</span>
+                        <h4>Professional</h4>
+                        <div class="price">$12.99<span class="period">/mo</span></div>
+                        <ul>
+                            <li><i class="bi bi-check-circle-fill"></i>4 vCPU Cores</li>
+                            <li><i class="bi bi-check-circle-fill"></i>8 GB RAM</li>
+                            <li><i class="bi bi-check-circle-fill"></i>200 GB SSD</li>
+                            <li><i class="bi bi-check-circle-fill"></i>8 TB Bandwidth</li>
+                            <li><i class="bi bi-check-circle-fill"></i>1 IPv4 + IPv6</li>
+                            <li><i class="bi bi-check-circle-fill"></i>DDoS Protection</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary-custom">Choose Professional</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="pricing-card">
+                        <h4>Business</h4>
+                        <div class="price">$29.99<span class="period">/mo</span></div>
+                        <ul>
+                            <li><i class="bi bi-check-circle-fill"></i>8 vCPU Cores</li>
+                            <li><i class="bi bi-check-circle-fill"></i>32 GB RAM</li>
+                            <li><i class="bi bi-check-circle-fill"></i>1 TB NVMe SSD</li>
+                            <li><i class="bi bi-check-circle-fill"></i>20 TB Bandwidth</li>
+                            <li><i class="bi bi-check-circle-fill"></i>2 IPv4 + IPv6</li>
+                            <li><i class="bi bi-check-circle-fill"></i>Priority Support</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary-custom">Choose Business</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"GLM VPS has been rock solid. The performance is outstanding and support is super responsive. Highly recommended!"</p>
+                        <div class="user">
+                            <img src="https://via.placeholder.com/50" alt="User">
+                            <div>
+                                <div class="name">John Doe</div>
+                                <div class="role">Web Developer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"I migrated all my client sites to GLM VPS and haven't looked back. The uptime is perfect and the pricing is unbeatable."</p>
+                        <div class="user">
+                            <img src="https://via.placeholder.com/50" alt="User">
+                            <div>
+                                <div class="name">Jane Smith</div>
+                                <div class="role">Agency Owner</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <p>"The DDoS protection saved us during a major attack. GLM VPS kept our services online. Incredible reliability."</p>
+                        <div class="user">
+                            <img src="https://via.placeholder.com/50" alt="User">
+                            <div>
+                                <div class="name">Mike Johnson</div>
+                                <div class="role">DevOps Engineer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2025 GLM VPS. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
